@@ -16,7 +16,7 @@
 
 ### ステップ1：リポジトリを取得してワークスペースを開く
 ```bash
-git clone <このリポジトリのURL>
+git clone https://github.com/norisoz/requirements-driven-ai-workspace.git
 ```
 取得したフォルダ（本 `README.md` が直下にあるルート）をそのまま Antigravity のワークスペースとして開きます。
 ルート直下の `AGENTS.md` と `.agents/skills/` が自動で認識されます。
