@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/phase/P12.schema.json",
+  "title": "P12 廃止・移行",
+  "type": "object",
+  "required": [
+    "retirement_triggers",
+    "retirement_owner",
+    "retirement_scope_policy",
+    "risk_and_fallback",
+    "notification_policy"
+  ],
+  "properties": {
+    "retirement_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "retirement_owner": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "retirement_scope_policy": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "risk_and_fallback": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "notification_policy": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "migration_plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "contract_termination_plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "log_retention_plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

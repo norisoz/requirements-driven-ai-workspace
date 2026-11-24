@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/phase/P08.schema.json",
+  "title": "P08 要求ベースライン化",
+  "type": "object",
+  "required": [
+    "baseline_id",
+    "included_requirement_ids",
+    "version",
+    "agreement_records",
+    "approval_record_ids",
+    "effective_condition"
+  ],
+  "properties": {
+    "baseline_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "included_requirement_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "agreement_records": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "approval_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "effective_condition": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "formal_approval_path": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

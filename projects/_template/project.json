@@ -1,0 +1,51 @@
+{
+  "project_id": "PRJ-TEMPLATE",
+  "project_name": "{{PROJECT_NAME}}",
+  "task_type": "{{TASK_NAME}}",
+  "owner": "{{USER_NAME}}",
+  "created_at": "{{CREATED_DATE}}",
+  "updated_at": "{{CREATED_DATE}}",
+  "summary": "",
+  "keywords": [],
+  "work_type": "DOCUMENT",
+  "risk_level": "UNKNOWN",
+  "deliverable": {
+    "deliverable_type": null,
+    "output_format": null,
+    "maturity_level": null,
+    "notes": ""
+  },
+  "input_policy": {
+    "mode": "INPUTS_ONLY",
+    "allowed_paths": [
+      "inputs/"
+    ],
+    "allow_web_search": false,
+    "imported_files": [],
+    "notes": "案件ごとに人間が参照範囲（INPUTS_ONLY: inputs/内のみ参照 / FLEXIBLE: 外部検索や追加資料を許可）を管理する。"
+  },
+  "attributes": {
+    "uses_ai": null,
+    "handles_sensitive_data": null,
+    "has_external_obligations": null,
+    "requires_formal_approval": null,
+    "requires_quantitative_evaluation": null,
+    "has_external_vendor": null,
+    "requires_data_migration": null,
+    "is_global": null
+  },
+  "phase_status": {
+    "P01": "NOT_STARTED",
+    "P02": "NOT_STARTED",
+    "P03": "NOT_STARTED",
+    "P04": "NOT_STARTED",
+    "P05": "NOT_STARTED",
+    "P06": "NOT_STARTED",
+    "P07": "NOT_STARTED",
+    "P08": "NOT_STARTED",
+    "P09": "NOT_STARTED",
+    "P10": "NOT_STARTED",
+    "P11": "NOT_STARTED",
+    "P12": "NOT_STARTED"
+  }
+}

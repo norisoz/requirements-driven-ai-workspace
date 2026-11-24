@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/requirements_ledger.schema.json",
+  "title": "AI時代の要求管理台帳（正本）スキーマ（ハンドブック表9・表40〜41・6.8節準拠）",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ledger_id",
+    "project_id",
+    "version",
+    "management_mode",
+    "items"
+  ],
+  "properties": {
+    "ledger_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "management_mode": {
+      "enum": [
+        "SEPARATED",
+        "UNIFIED"
+      ],
+      "description": "2.6節: 理想的には要求と要件を分離管理(SEPARATED)。6条件を満たす場合は同一管理(UNIFIED)可。"
+    },
+    "unified_justification": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "requirement_id",
+          "record_kind",
+          "title",
+          "statement",
+          "category",
+          "source_ref",
+          "rationale",
+          "priority",
+          "status",
+          "verification_method",
+          "created_at",
+          "created_by",
+          "owner",
+          "version"
+        ],
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_kind": {
+            "enum": [
+              "NEED",
+              "REQUIREMENT",
+              "SPECIFICATION"
+            ],
+            "description": "1.2節 表2: 要望(NEED)・要求(REQUIREMENT)・要件(SPECIFICATION)の3層識別"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": [
+              "BUSINESS",
+              "STAKEHOLDER",
+              "SYSTEM",
+              "SOFTWARE",
+              "DATA",
+              "AI",
+              "RULE",
+              "EVALUATION",
+              "OPERATION",
+              "SECURITY"
+            ]
+          },
+          "source_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "enum": [
+              "Must",
+              "Should",
+              "Could",
+              "Wont",
+              "TBD"
+            ]
+          },
+          "status": {
+            "enum": [
+              "CANDIDATE",
+              "PROPOSED",
+              "APPROVED",
+              "IN_IMPLEMENTATION",
+              "VERIFIED",
+              "DEPRECATED",
+              "REJECTED"
+            ]
+          },
+          "target_system": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "related_ids": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "goals": { "type": "array", "items": { "type": "string" } },
+              "parent_requirements": { "type": "array", "items": { "type": "string" } },
+              "child_specifications": { "type": "array", "items": { "type": "string" } },
+              "dependencies": { "type": "array", "items": { "type": "string" } },
+              "business_processes": { "type": "array", "items": { "type": "string" } },
+              "data_items": { "type": "array", "items": { "type": "string" } },
+              "functions": { "type": "array", "items": { "type": "string" } },
+              "ai_models": { "type": "array", "items": { "type": "string" } },
+              "prompts": { "type": "array", "items": { "type": "string" } },
+              "laws_and_rules": { "type": "array", "items": { "type": "string" } },
+              "tests": { "type": "array", "items": { "type": "string" } },
+              "operation_logs": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "verification_method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "created_at": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+          },
+          "created_by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "change_history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "changed_at",
+                "reason_category",
+                "reason",
+                "approver"
+              ],
+              "properties": {
+                "changed_at": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+                },
+                "reason_category": {
+                  "enum": [
+                    "ENVIRONMENT_CHANGE",
+                    "LEARNING",
+                    "INITIAL_DEFECT"
+                  ],
+                  "description": "11.5節: 環境変化による変更 / 学習による変更 / 初期要求定義の不備の訂正"
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "approver": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "ai_agent_and_model": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "6.8節: 作成・レビューに用いたAIエージェント及びモデル等"
+          }
+        }
+      }
+    }
+  }
+}

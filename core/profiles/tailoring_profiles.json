@@ -1,0 +1,90 @@
+{
+  "version": "1.0.0",
+  "level_order": [
+    "LIGHT",
+    "STANDARD",
+    "ENHANCED"
+  ],
+  "work_type_min_level": {
+    "DOCUMENT": "LIGHT",
+    "POLICY": "STANDARD",
+    "PROCESS": "STANDARD",
+    "SYSTEM": "STANDARD",
+    "AI_SYSTEM": "STANDARD"
+  },
+  "risk_level_map": {
+    "LOW": "LIGHT",
+    "MEDIUM": "STANDARD",
+    "HIGH": "ENHANCED",
+    "UNKNOWN": null
+  },
+  "work_type_required_attributes": {
+    "AI_SYSTEM": {
+      "uses_ai": true
+    }
+  },
+  "risk_classification_criteria": {
+    "LOW": "影響範囲が限定的で、誤りが容易に修正でき、重大な統制・法令上の影響がない",
+    "MEDIUM": "複数の利用者・部門に影響し、誤りが業務や管理策の運用に影響し得る",
+    "HIGH": "重要なセキュリティ統制、全社方針、重大な法令義務、重要業務の継続性に影響する"
+  },
+  "risk_classification_questions": [
+    {
+      "field_id": "risk_level",
+      "question": "本案件のリスクレベル（LOW / MEDIUM / HIGH）を判断するため、影響範囲（部門・全社・社外）、機密情報や法令義務の有無、誤りが生じた場合の影響を教えてください。"
+    }
+  ],
+  "profiles": {
+    "LIGHT": {
+      "label": "簡易",
+      "review_requirement": "担当者レビュー",
+      "approval_requirement": "責任者の承認・版固定",
+      "requires_cross_functional_review": false,
+      "requires_external_approval_on_formal": false,
+      "phase_required_fields": {
+        "P01": ["objective", "scope", "success_criteria"],
+        "P02": ["stakeholders", "decision_owner"],
+        "P03": ["sources", "candidate_requirements", "human_review_status"],
+        "P04": ["duplicates_and_conflicts", "selected_approach"],
+        "P05": ["specifications", "acceptance_criteria"],
+        "P06": ["model_scope", "models"],
+        "P07": ["stakeholder_reviews", "open_findings"],
+        "P08": ["baseline_id", "included_requirement_ids", "version", "approval_record_ids"],
+        "P09": ["requirement_realization_map", "implementation_owners", "deliverables"],
+        "P10": ["monitoring_targets", "monitoring_owner"],
+        "P11": ["change_intake_process", "change_approval_process"],
+        "P12": ["retirement_triggers", "retirement_owner", "notification_policy"]
+      }
+    },
+    "STANDARD": {
+      "label": "標準",
+      "review_requirement": "要求ごとの品質確認（担当者＋関係者レビュー）",
+      "approval_requirement": "正式な変更・承認記録",
+      "requires_cross_functional_review": false,
+      "requires_external_approval_on_formal": true,
+      "phase_required_fields": "ALL_REQUIRED"
+    },
+    "ENHANCED": {
+      "label": "厳格",
+      "review_requirement": "関係部門によるレビューおよびトレーサビリティ確認",
+      "approval_requirement": "承認証跡・影響関係の厳格管理",
+      "requires_cross_functional_review": true,
+      "requires_external_approval_on_formal": true,
+      "phase_required_fields": "ALL_REQUIRED",
+      "additional_required_fields": {},
+      "conditional_additional_required_fields": {
+        "P04": [
+          {"field_id": "ai_social_impact", "attribute": "uses_ai", "equals": true},
+          {"field_id": "data_supply_chain", "attribute": "uses_ai", "equals": true}
+        ],
+        "P05": [
+          {"field_id": "ai_uncertainty_failsafe", "attribute": "uses_ai", "equals": true},
+          {"field_id": "prompt_management_spec", "attribute": "uses_ai", "equals": true}
+        ],
+        "P10": [
+          {"field_id": "assurance_case", "attribute": "uses_ai", "equals": true}
+        ]
+      }
+    }
+  }
+}

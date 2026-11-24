@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/phase/P10.schema.json",
+  "title": "P10 運用・監視",
+  "type": "object",
+  "required": [
+    "monitoring_targets",
+    "metrics_and_methods",
+    "monitoring_owner",
+    "evidence_policy",
+    "escalation_and_response"
+  ],
+  "properties": {
+    "monitoring_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "metrics_and_methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "monitoring_owner": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evidence_policy": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "escalation_and_response": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "ai_quality_monitoring": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "sensitive_data_monitoring": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "assurance_case": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

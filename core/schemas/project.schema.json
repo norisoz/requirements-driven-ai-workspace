@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_id",
+    "work_type",
+    "risk_level",
+    "attributes",
+    "attribute_provenance",
+    "phase_status"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "work_type": {
+      "enum": [
+        "DOCUMENT",
+        "POLICY",
+        "PROCESS",
+        "SYSTEM",
+        "AI_SYSTEM"
+      ]
+    },
+    "risk_level": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "UNKNOWN"
+      ]
+    },
+    "deliverable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deliverable_type": {
+          "enum": [
+            "SLIDE",
+            "SLIDE_OUTLINE",
+            "PROPOSAL",
+            "SPECIFICATION",
+            "DESIGN_DOC",
+            "INTERNAL_NOTICE",
+            "POLICY_DOC",
+            "REPORT",
+            "MANUAL",
+            "OTHER",
+            null
+          ]
+        },
+        "output_format": {
+          "enum": [
+            "md",
+            "txt",
+            "docx",
+            "pptx",
+            "xlsx",
+            "pdf",
+            "html",
+            "json",
+            "other",
+            null
+          ]
+        },
+        "maturity_level": {
+          "enum": [
+            "DRAFT_SKETCH",
+            "MANAGER_REVIEW",
+            "CROSS_DEPT_REVIEW",
+            "FINAL_DELIVERABLE",
+            null
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "tailoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "effective_level": {
+          "enum": [
+            "LIGHT",
+            "STANDARD",
+            "ENHANCED",
+            null
+          ]
+        },
+        "requested_level": {
+          "enum": [
+            "LIGHT",
+            "STANDARD",
+            "ENHANCED",
+            null
+          ]
+        },
+        "risk_rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "risk_confirmed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "simplification_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "simplification_approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previous_risk_level": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "UNKNOWN",
+            null
+          ]
+        },
+        "reevaluation_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "required": [
+        "uses_ai",
+        "handles_sensitive_data",
+        "has_external_obligations",
+        "requires_formal_approval",
+        "requires_quantitative_evaluation",
+        "has_external_vendor",
+        "requires_data_migration"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "uses_ai": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "handles_sensitive_data": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_external_obligations": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "requires_formal_approval": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "requires_quantitative_evaluation": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_external_vendor": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "requires_data_migration": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "is_global": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "phase_status": {
+      "type": "object",
+      "required": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "P01": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P02": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P03": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P04": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P05": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P06": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P07": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P08": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P09": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P10": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P11": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        },
+        "P12": {
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "BLOCKED",
+            "IN_REVIEW",
+            "APPROVED",
+            "REOPENED"
+          ]
+        }
+      }
+    },
+    "attribute_provenance": {
+      "type": "object",
+      "required": [
+        "uses_ai",
+        "handles_sensitive_data",
+        "has_external_obligations",
+        "requires_formal_approval",
+        "requires_quantitative_evaluation",
+        "has_external_vendor",
+        "requires_data_migration"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "uses_ai": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "handles_sensitive_data": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "has_external_obligations": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "requires_formal_approval": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "requires_quantitative_evaluation": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "has_external_vendor": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "requires_data_migration": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        },
+        "is_global": {
+          "enum": [
+            "HUMAN",
+            "VERIFIED_SOURCE",
+            "AI_INFERRED",
+            "UNSET"
+          ]
+        }
+      }
+    }
+  }
+}

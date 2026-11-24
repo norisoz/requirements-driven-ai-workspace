@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/artifact.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "project_id",
+    "phase_id",
+    "version",
+    "status",
+    "content",
+    "field_states",
+    "source_refs",
+    "related_artifact_ids",
+    "issues",
+    "review",
+    "approval"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase_id": {
+      "enum": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "supersedes_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "BLOCKED",
+        "IN_REVIEW",
+        "APPROVED",
+        "REOPENED",
+        "SUPERSEDED"
+      ]
+    },
+    "content": {
+      "type": "object"
+    },
+    "source_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "related_artifact_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "issue_id",
+          "severity",
+          "status",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "issue_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "issue_type": {
+            "enum": [
+              "MISSING_INFO",
+              "CONFLICT",
+              "RISK",
+              "AMBIGUITY",
+              "COMPLIANCE",
+              "TAILORING_MISMATCH",
+              "OTHER"
+            ]
+          },
+          "field_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "MAJOR",
+              "MINOR",
+              "INFO"
+            ]
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "RESOLVED",
+              "ACCEPTED_RISK"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "due_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "escalation_target": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "resolution_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_status",
+        "reviewer_id",
+        "review_version"
+      ],
+      "properties": {
+        "semantic_status": {
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "FAILED"
+          ]
+        },
+        "reviewer_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cross_functional_reviewed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "approver_id",
+        "approval_id",
+        "content_sha256",
+        "externally_verified"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "PENDING",
+            "APPROVED",
+            "REJECTED"
+          ]
+        },
+        "channel": {
+          "enum": [
+            "EXTERNAL_SYSTEM",
+            "INTERACTIVE_HUMAN",
+            "PRE_OUTPUT_ORAL",
+            "NONE"
+          ]
+        },
+        "approver_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approval_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "externally_verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "field_states": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "UNKNOWN",
+          "PROPOSED",
+          "CONFIRMED",
+          "CONFLICTED",
+          "NOT_APPLICABLE"
+        ]
+      }
+    }
+  }
+}

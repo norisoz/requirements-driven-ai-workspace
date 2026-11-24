@@ -1,0 +1,1014 @@
+[
+  {
+    "phase_id": "P01",
+    "name": "目的・ミッション確認",
+    "purpose": "目的と手段を区別し、成功条件を確認した暫定ミッションを作る。後工程で改訂できる。",
+    "ipa_basis": [
+      "7.2.1",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "objective",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "最終的に何を実現したいですか。手段ではなく到達状態を教えてください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "problem",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "現在、誰にどのような問題が生じていますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "target_value",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "改善によって誰にどんな価値が生まれますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "beneficiaries",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "利益を受ける人や組織は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "scope",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "対象の組織、業務、適用範囲はどこまでですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "success_criteria",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "何を確認できれば成功と判断しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "risks",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "実現にあたり避けたい重大なリスクは何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "quantitative_metrics",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "定量評価が必要です。指標、測定方法、目標値を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "requires_quantitative_evaluation",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "regulatory_constraints",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "対象となる法令、標準、契約上の制約は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_obligations",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "out_of_scope",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "今回は対象外にする業務はありますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "simplification_review",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "所与の条件（既存業務手順・承認・帳票・社内規則）のうち、目的に照らして不要・簡素化できるものはありますか。（ハンドブック1.4節）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P02",
+    "name": "ステークホルダー特定",
+    "purpose": "関係者の状況と責任を整理し、未合意点を明示する。想像上の関係者の合意は認めない。",
+    "ipa_basis": [
+      "7.2.2",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "stakeholders",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "利用者、影響を受ける人、実務担当、審査担当は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "roles",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各関係者の役割は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "decision_owner",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "目的と最終成果物の決裁者は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "constraints",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "関係者ごとの制約と懸念は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "context_alignment",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "現時点で共有された方向性・対立点は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_reviewers",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIの出力を確認する人と、事故時に対応する人は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "data_controller",
+        "requirement": "CONDITIONAL",
+        "value_type": "string",
+        "question": "機密・個人情報の管理責任者は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "handles_sensitive_data",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P03",
+    "name": "要求獲得",
+    "purpose": "要望と要求候補を混同せず、出典のある候補を収集する。採用決定はしない。",
+    "ipa_basis": [
+      "7.2.3",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "sources",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "参照する資料、議事録、規程、ログ、関係者の意見の一覧を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "candidate_requirements",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "実現したいことを関係者の言葉や資料から抽出してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "source_mapping",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求候補はどの資料や発言から導かれましたか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "human_review_status",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "抽出した要求候補を誰が確認しましたか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "unreviewed_gaps",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "未確認の情報源・関係者を列挙してください。無ければ「なし」と記録します。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "external_requirements",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "関連する外部要件と条項、適用理由を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_obligations",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "log_analysis",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "問い合わせやインシデントのログから確認すべき事項はありますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "minority_signals",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "多数意見以外に、少数だが重要な兆候・例外・新たなニーズ（「光る原石」）はありますか。（ハンドブック8.2節）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P04",
+    "name": "要求分析",
+    "purpose": "重複・矛盾を整理し、人間が優先度と実現方針を決める。",
+    "ipa_basis": [
+      "7.2.4",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "classification",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "要求を業務、システム、データ、AI、ルール、評価、運用等に分類してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "duplicates_and_conflicts",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "重複・潜在的矛盾・解決状況を列挙してください。「なし」も判断根拠が必要です。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "priorities",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求の優先度と人間の判断根拠は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "feasibility",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "実現可能性、制約、未解決の技術課題を列挙してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "risks",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "要求を実現する際のリスクと対応方針は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "realization_options",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "人、業務、ルール、システム、AIなどの選択肢と比較理由は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "selected_approach",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "人間が採用した実現方針と選定理由は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_data_requirements",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AI利用目的・利用範囲・禁止範囲・入出力・人間関与・評価指標・監視・更新・証跡・インシデント対応、および必要データの条件を明示してください。（ハンドブック5.2節 表18・8.5節）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "sensitive_data_controls",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "データ保護・アクセス統制上の要求を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "handles_sensitive_data",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "simplification_decisions",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "所与の条件（既存手順・承認・規則・データ項目）を見直し、簡素化・廃止した判断内容を記録してください。（ハンドブック1.4節）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_social_impact",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "AIの社会的受容性・倫理的影響（影響を受ける人、不利益・バイアス・差別、説明可能性、異議申立て手順、AI出力の明示、人間関与）を評価してください。（ハンドブック5.5節 表22）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "data_supply_chain",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "データ供給チェーン（出自/Provenance、利用目的整合、権利処理、多様性・代表性・バイアス、アノテーション基準、加工履歴、保存・削除）を示してください。（ハンドブック8.4節 表29〜30）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "global_local_requirements",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "グローバル共通要件・リージョン要件・ローカル要件・例外要件の区分、データ越境、用語集、法制度・商習慣の差異を整理してください。（ハンドブック第4章 表15〜16）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "is_global",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P05",
+    "name": "要求仕様化",
+    "purpose": "人と機械の両方が参照でき、評価可能な仕様を作る。",
+    "ipa_basis": [
+      "7.2.5",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "specifications",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求を識別子付きで明確に仕様化してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "scope_and_conditions",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各仕様の対象、前提条件、境界条件を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "acceptance_criteria",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "何を満たせば受け入れられるか、観測可能な条件を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "verification_methods",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各仕様をどのように検証しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "exception_handling",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "例外や失敗時にどう処理するかを示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_evaluation_requirements",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIの入力、出力、許容範囲、人間による介入、評価指標・信頼区間、再評価・更新条件を明示してください。（ハンドブック5.3節・8.6節 表31）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "output_format",
+        "requirement": "OPTIONAL",
+        "value_type": "string",
+        "question": "文書、表、BPMN等の指定はありますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_uncertainty_failsafe",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "AIの不確実性・迷った時の振る舞い（確信度低下、入力不十分、OOD想定外入力、根拠不明、ハルシネーション疑義、フェイルセーフ、人間エスカレーション）を仕様化してください。（ハンドブック5.3節 表19〜20）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "prompt_management_spec",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "業務利用するプロンプト（目的・役割・入力・制約・出力形式・評価基準・根拠）と参照データ・レビュー手順・変更履歴・承認・評価のセット管理仕様を示してください。（ハンドブック5.4節 表21）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P06",
+    "name": "モデリング",
+    "purpose": "詳細化はリスク相応とし、重要な関係の可視化と要求整合を確認する。",
+    "ipa_basis": [
+      "7.2.6",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "model_scope",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "何をどの粒度でモデル化しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "models",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "業務・ルール・データ・構成・評価の関係を表すモデルを列挙してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "nodes_and_relationships",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "主要な要素、関係、依存を一覧化してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "requirement_links",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "モデル要素と要求IDの対応を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "model_review",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "関係者によるモデル確認結果を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_model_boundary",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIに委ねる範囲・人間の介入ポイントを図示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "compliance_mapping",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "法令・標準とモデル要素の関係を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_obligations",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P07",
+    "name": "要求評価・妥当性確認",
+    "purpose": "重大指摘を解消し、正式な人間レビューを得る。AIのみの自己評価は通過条件としない。",
+    "ipa_basis": [
+      "7.2.7",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "necessity_reviews",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求が必要である根拠を評価してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "feasibility_reviews",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求の実現可能性を評価してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "verifiability_reviews",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求の検証可能性を評価してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "consistency_reviews",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "要求・仕様・モデル間の矛盾を確認してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "stakeholder_reviews",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "関係者の実際の確認・相違点・対応結果は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "open_findings",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "未解消の指摘とその重大度を列挙してください。なければ「なし」。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_runtime_reviews",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIの入出力、評価指標、監視、ログ、更新条件を検証してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P08",
+    "name": "要求ベースライン化",
+    "purpose": "承認済み要求集合を凍結し、以後は版を更新する。",
+    "ipa_basis": [
+      "7.2.8",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "baseline_id",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "要求ベースラインの一意なIDを設定してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "included_requirement_ids",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "対象要求IDと版を列挙してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "version",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "ベースライン版を指定してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "agreement_records",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "関係者との合意結果と確認方法を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "approval_record_ids",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "実際の承認記録の識別子は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "effective_condition",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "どの時点・条件から適用されますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "formal_approval_path",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "決裁経路・権限・証跡を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "requires_formal_approval",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P09",
+    "name": "実現手段への接続",
+    "purpose": "要求を実現手段と検証計画につなぐ。実装・調達の完了と混同しない。",
+    "ipa_basis": [
+      "7.2.9",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "requirement_realization_map",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各要求はどの施策、文書、業務、システムで実現しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "implementation_owners",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "各実現手段の実施責任者は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "deliverables",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "作成・導入する具体的成果物は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "verification_plan",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "受入基準、検証責任者、証跡を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "handoff_decisions",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "要求から実現部門への引き継ぎを誰が確認しましたか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_model_handoff",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIモデル・データ・プロンプト・評価・更新の引継ぎを示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "procurement_plan",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "調達・契約に必要な要求・責任分界を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_vendor",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P10",
+    "name": "運用・監視",
+    "purpose": "初期ゲートは運用監視計画の準備完了。運用中は測定・評価を反復。",
+    "ipa_basis": [
+      "7.2.10",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "monitoring_targets",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "目的・要求と対応する監視対象は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "metrics_and_methods",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "指標、確認方法、評価周期を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "monitoring_owner",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "運用監視の責任者は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "evidence_policy",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "どの監視記録・証跡を残しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "escalation_and_response",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "逸脱があった場合の連絡先と対処手順は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "ai_quality_monitoring",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "AIの継続監視（性能・安全性・公平性・頑健性・セキュリティ・データ品質）および更新トリガー条件（劣化・分布変化・苦情・インシデント・法令/モデル/外部サービス変更・監査指摘）としきい値・停止条件を示してください。（ハンドブック5.6節 表23〜24）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "uses_ai",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "sensitive_data_monitoring",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "機密データや監査ログの適切性を確認してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "handles_sensitive_data",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "observations",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "実運用で測定した結果はありますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "assurance_case",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "高リスクAI利用のアシュアランス・ケース（主張、根拠、証拠、前提条件）および運用後の見直し条件を定義してください。（ハンドブック5.6節）",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P11",
+    "name": "フィードバック・変更管理",
+    "purpose": "初期ゲートは変更管理プロセスの完成。個別変更はイベント単位で再評価と承認。",
+    "ipa_basis": [
+      "7.2.11",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "change_intake_process",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "変更要求を誰がどこで受け付けますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "change_triggers",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "法改正、事故、監査、業務変更、AI更新等の変更トリガーは何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "impact_analysis_process",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "影響する要求・仕様・モデル・テストをどのように追跡しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "change_approval_process",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "変更の承認責任者と経路を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "revalidation_process",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "変更後の再評価・再検証は誰が実施しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "change_records",
+        "requirement": "OPTIONAL",
+        "value_type": "str_list",
+        "question": "現在処理中の個別変更はありますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "regulatory_change_process",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "法令・規格変更の収集と判定手順を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_obligations",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  },
+  {
+    "phase_id": "P12",
+    "name": "廃止・移行",
+    "purpose": "初期ゲートは廃止移行の方針完成。イベント時は証跡による実施完了を別判定。",
+    "ipa_basis": [
+      "7.2.12",
+      "第16章"
+    ],
+    "fields": [
+      {
+        "field_id": "retirement_triggers",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "どの条件で廃止や移行を開始しますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "retirement_owner",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "廃止・移行の判断責任者は誰ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "retirement_scope_policy",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "廃止・移行対象の特定方法は何ですか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "risk_and_fallback",
+        "requirement": "REQUIRED",
+        "value_type": "str_list",
+        "question": "移行失敗時のリスク、代替手段、復旧をどう扱いますか。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "notification_policy",
+        "requirement": "REQUIRED",
+        "value_type": "string",
+        "question": "利用者・関係者への通知方法を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA"
+      },
+      {
+        "field_id": "migration_plan",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "データ移行、検証、削除・保存の手順を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "requires_data_migration",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "contract_termination_plan",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "外部契約・供給者の終了条件を確認してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "has_external_vendor",
+          "equals": true
+        }
+      },
+      {
+        "field_id": "log_retention_plan",
+        "requirement": "CONDITIONAL",
+        "value_type": "str_list",
+        "question": "ログ・機密記録の保存期間、アクセス、廃棄を示してください。",
+        "source_class": "DESIGN_DERIVED_FROM_IPA",
+        "when": {
+          "attribute": "handles_sensitive_data",
+          "equals": true
+        }
+      }
+    ],
+    "gate_rules": [
+      "schema_valid",
+      "required_fields_confirmed",
+      "conditional_applicability_resolved",
+      "critical_findings_resolved",
+      "references_valid",
+      "human_review_completed"
+    ]
+  }
+]

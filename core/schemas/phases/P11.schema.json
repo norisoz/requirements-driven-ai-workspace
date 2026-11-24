@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/req-agent/phase/P11.schema.json",
+  "title": "P11 フィードバック・変更管理",
+  "type": "object",
+  "required": [
+    "change_intake_process",
+    "change_triggers",
+    "impact_analysis_process",
+    "change_approval_process",
+    "revalidation_process"
+  ],
+  "properties": {
+    "change_intake_process": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "change_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "impact_analysis_process": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "change_approval_process": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "revalidation_process": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "change_records": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "regulatory_change_process": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}
